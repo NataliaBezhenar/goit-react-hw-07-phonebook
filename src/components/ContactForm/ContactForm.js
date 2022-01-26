@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import shortid from "shortid";
 import "./ContactForm.css";
 
-import { addContact } from "../../redux/contact/contact-action";
+import contactOperations from "../../redux/contact/contact-operations";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addContact(name, number));
+    dispatch(contactOperations.addContact(name, number));
     reset();
   };
 

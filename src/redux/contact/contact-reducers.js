@@ -1,14 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addContact, deleteContact } from "./contact-action";
+import actions from "./contact-action";
 
 export const contactsReducer = createReducer([], {
-  [addContact]: (state, { payload }) => {
+  [actions.fetchContactsSuccess]: (_, { payload }) => payload,
+  [actions.addContactSuccess]: (state, { payload }) => {
+    console.log("in contactsReducer, addContactSuccess action");
     if (state.find((contact) => contact.name === payload.name)) {
+      console.log("same name");
       alert(payload.name + " is already in contacts");
       return;
     }
     return [...state, payload];
   },
-  [deleteContact]: (state, { payload }) =>
-    state.filter((contact) => contact.id !== payload),
+  [actions.deleteContactSuccess]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload),
 });
