@@ -1,7 +1,7 @@
 import axios from "axios";
 import actions from "./contact-action";
 
-axios.defaults.baseURL = "http://localhost:4040";
+axios.defaults.baseURL = "https://61f3e8f010f0f7001768c730.mockapi.io/";
 
 const fetchContacts = () => async (dispatch) => {
   dispatch(actions.fetchContactsRequest());
