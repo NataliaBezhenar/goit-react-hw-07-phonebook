@@ -12,10 +12,7 @@ const ContactList = () => {
     contacts = data;
   }
 
-  console.log(contacts);
-
   const filter = useSelector((state) => state.filter);
-
   const filteredContacts = () => {
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter)
