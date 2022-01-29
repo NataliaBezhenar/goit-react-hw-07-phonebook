@@ -3,15 +3,16 @@ import actions from "./contact-action";
 
 axios.defaults.baseURL = "https://61f3e8f010f0f7001768c730.mockapi.io/";
 
-const fetchContacts = () => async (dispatch) => {
-  dispatch(actions.fetchContactsRequest());
-  try {
-    const { data } = await axios.get("/contacts");
-    dispatch(actions.fetchContactsSuccess(data));
-  } catch (error) {
-    dispatch(actions.fetchContactsError(error));
-  }
-};
+// const fetchContacts = () => async (dispatch) => {
+//   [];
+// dispatch(actions.fetchContactsRequest());
+// try {
+//   const { data } = await axios.get("/contacts");
+//   dispatch(actions.fetchContactsSuccess(data));
+// } catch (error) {
+//   dispatch(actions.fetchContactsError(error));
+//};
+//};
 
 const addContact = (name, number) => async (dispatch) => {
   const contact = { name, number };
@@ -36,4 +37,8 @@ const deleteContact = (id) => async (dispatch) => {
   }
 };
 
-export default { addContact, deleteContact, fetchContacts };
+export default {
+  addContact,
+  deleteContact,
+  //fetchContacts
+};

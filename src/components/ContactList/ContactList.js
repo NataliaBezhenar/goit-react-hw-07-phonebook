@@ -1,23 +1,32 @@
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./ContactList.css";
 import contactOperations from "../../redux/contact/contact-operations";
-import { useEffect } from "react";
+import { useGetAllContactsQuery } from "../../redux/contact/contact-reducers";
 
 const ContactList = () => {
-  const contacts = useSelector((state) => state.contacts);
+  let contacts = [];
+  const { data, error, isFetching, isError } = useGetAllContactsQuery();
+  console.log(isFetching);
+  if (!isFetching) {
+    console.log(data);
+    contacts = data;
+  }
+  console.log(contacts);
   const filter = useSelector((state) => state.filter);
-
+  console.log(filter);
   const filteredContacts = () => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter)
-    );
+    if (contacts) {
+      return contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(filter)
+      );
+    }
   };
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(contactOperations.fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(contactOperations.fetchContacts());
+  // }, [dispatch]);
 
   return (
     <ul className="ContactList">
@@ -38,8 +47,4 @@ const ContactList = () => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchContacts: () => dispatch(contactOperations.fetchContacts()),
-});
-
-export default connect(null, mapDispatchToProps)(ContactList);
+export default ContactList;

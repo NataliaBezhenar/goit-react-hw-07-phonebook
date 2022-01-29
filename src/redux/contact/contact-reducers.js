@@ -1,17 +1,16 @@
-import { createReducer } from "@reduxjs/toolkit";
-import actions from "./contact-action";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const contactsReducer = createReducer([], {
-  [actions.fetchContactsSuccess]: (_, { payload }) => payload,
-  [actions.addContactSuccess]: (state, { payload }) => {
-    console.log("in contactsReducer, addContactSuccess action");
-    if (state.find((contact) => contact.name === payload.name)) {
-      console.log("same name");
-      alert(payload.name + " is already in contacts");
-      return;
-    }
-    return [...state, payload];
-  },
-  [actions.deleteContactSuccess]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
+export const contactApi = createApi({
+  reducerPath: "contactApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://61f3e8f010f0f7001768c730.mockapi.io/",
+  }),
+  endpoints: (builder) => ({
+    getContactById: builder.query({
+      query: (id) => `contacts/${id}`,
+    }),
+    getAllContacts: builder.query({ query: () => "contacts" }),
+  }),
 });
+
+export const { useGetContactByIdQuery, useGetAllContactsQuery } = contactApi;
