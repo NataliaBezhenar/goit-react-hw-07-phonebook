@@ -3,7 +3,7 @@ import "./ContactList.css";
 import {
   useDeleteContactMutation,
   useGetAllContactsQuery,
-} from "../../redux/contact/contact-reducers";
+} from "../../redux/contact/contactSlice";
 
 const ContactList = () => {
   let contacts = [];
@@ -15,6 +15,7 @@ const ContactList = () => {
   console.log(contacts);
 
   const filter = useSelector((state) => state.filter);
+
   const filteredContacts = () => {
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter)

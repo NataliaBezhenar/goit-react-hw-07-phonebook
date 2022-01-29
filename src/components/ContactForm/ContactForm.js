@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import shortid from "shortid";
 import "./ContactForm.css";
-import { useCreateConatctMutation } from "../../redux/contact/contact-reducers";
+import { useCreateConatctMutation } from "../../redux/contact/contactSlice";
 
 export default function ContactForm() {
   const [createConatct] = useCreateConatctMutation();
