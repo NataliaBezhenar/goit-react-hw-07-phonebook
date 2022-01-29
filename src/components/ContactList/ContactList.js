@@ -1,32 +1,27 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./ContactList.css";
-import contactOperations from "../../redux/contact/contact-operations";
-import { useGetAllContactsQuery } from "../../redux/contact/contact-reducers";
+import {
+  useDeleteContactMutation,
+  useGetAllContactsQuery,
+} from "../../redux/contact/contact-reducers";
 
 const ContactList = () => {
   let contacts = [];
-  const { data, error, isFetching, isError } = useGetAllContactsQuery();
-  console.log(isFetching);
-  if (!isFetching) {
-    console.log(data);
+  const { data, isSuccess } = useGetAllContactsQuery();
+  if (isSuccess) {
     contacts = data;
   }
+
   console.log(contacts);
+
   const filter = useSelector((state) => state.filter);
-  console.log(filter);
   const filteredContacts = () => {
-    if (contacts) {
-      return contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(filter)
-      );
-    }
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter)
+    );
   };
 
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(contactOperations.fetchContacts());
-  // }, [dispatch]);
+  const [deleteContact] = useDeleteContactMutation();
 
   return (
     <ul className="ContactList">
@@ -36,7 +31,7 @@ const ContactList = () => {
             {name}: {number}
             <button
               className="ContactList__button"
-              onClick={() => dispatch(contactOperations.deleteContact(id))}
+              onClick={() => deleteContact(id)}
             >
               Delete
             </button>

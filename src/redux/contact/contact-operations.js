@@ -26,19 +26,19 @@ const addContact = (name, number) => async (dispatch) => {
   }
 };
 
-const deleteContact = (id) => async (dispatch) => {
-  dispatch(actions.deleteContactRequest());
-  try {
-    console.log("delete async");
-    await axios.delete(`/contacts/${id}`);
-    dispatch(actions.deleteContactSuccess(id));
-  } catch (error) {
-    actions.deleteContactError(error);
-  }
-};
+// const deleteContact = (id) => async (dispatch) => {
+//   dispatch(actions.deleteContactRequest());
+//   try {
+//     console.log("delete async");
+//     await axios.delete(`/contacts/${id}`);
+//     dispatch(actions.deleteContactSuccess(id));
+//   } catch (error) {
+//     actions.deleteContactError(error);
+//   }
+// };
 
 export default {
   addContact,
-  deleteContact,
+  //deleteContact,
   //fetchContacts
 };
