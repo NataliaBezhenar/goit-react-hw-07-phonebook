@@ -1,4 +1,3 @@
-import types from "../contact/contact-types";
 import { createAction } from "@reduxjs/toolkit";
 
-export const filter = createAction(types.FILTER);
+export const filter = createAction("contact/filter");
