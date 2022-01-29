@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import shortid from "shortid";
 import "./ContactForm.css";
-
-import contactOperations from "../../redux/contact/contact-operations";
+import { useCreateConatctMutation } from "../../redux/contact/contact-reducers";
 
 export default function ContactForm() {
-  const dispatch = useDispatch();
+  const [createConatct] = useCreateConatctMutation();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -15,7 +13,7 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(contactOperations.addContact(name, number));
+    createConatct({ name, number });
     reset();
   };
 
